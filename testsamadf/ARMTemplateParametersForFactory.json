@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "testsamadf"
+		},
+		"AzureDataLakeStorage1_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://samtestaccount.dfs.core.windows.net"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_tenant": {
+			"value": "723e8d0b-aacd-4380-b346-90b189637523"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_servicePrincipalId": {
+			"value": "8123a2b8-9094-47a6-b1f3-ee99b960a92a"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://testsamkey.vault.azure.net/"
+		}
+	}
+}
