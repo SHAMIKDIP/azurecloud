@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "concat(@item().FirstName,'.txt')",
+					"value": "concat(item().FirstName,'.txt')",
 					"type": "Expression"
 				},
 				"fileSystem": "container"
