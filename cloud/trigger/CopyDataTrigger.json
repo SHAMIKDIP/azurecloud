@@ -1,0 +1,24 @@
+{
+	"name": "CopyDataTrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "testPipeline",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/testcontainer/blobs/logData",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/58956ed3-77c0-4fbc-b73a-a6f989680e97/resourceGroups/testresource/providers/Microsoft.Storage/storageAccounts/samtestaccount",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
