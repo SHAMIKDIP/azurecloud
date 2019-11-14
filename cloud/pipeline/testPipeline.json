@@ -90,6 +90,16 @@
 				}
 			}
 		],
+		"parameters": {
+			"successMsg": {
+				"type": "string",
+				"defaultValue": "Data copied Successfully"
+			},
+			"failureMsg": {
+				"type": "string",
+				"defaultValue": "Failed to copy data"
+			}
+		},
 		"annotations": []
 	}
 }
