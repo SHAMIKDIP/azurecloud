@@ -88,8 +88,90 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "InsertSuccessLog",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "IterateTableData",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[pipelinelogging]",
+					"storedProcedureParameters": {
+						"Msg": {
+							"value": {
+								"value": "@pipeline().parameters.successMsg",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "InsertFailureLog",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "IterateTableData",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[pipelinelogging]",
+					"storedProcedureParameters": {
+						"Msg": {
+							"value": {
+								"value": "@pipeline().parameters.failureMsg",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
+		"parameters": {
+			"successMsg": {
+				"type": "string",
+				"defaultValue": "Data copied Successfully"
+			},
+			"failureMsg": {
+				"type": "string",
+				"defaultValue": "Failed to copy data"
+			}
+		},
 		"annotations": []
 	}
 }
