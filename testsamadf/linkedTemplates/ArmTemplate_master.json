@@ -7,9 +7,29 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "testsamadf"
 		},
+		"AzureBlobConnection_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureBlobConnection'"
+		},
 		"AzureDataLakeStorage1_servicePrincipalKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeStorage1'"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"AzureBlobConnection_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "https://samtestblobstorage.blob.core.windows.net"
+		},
+		"AzureBlobConnection_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "723e8d0b-aacd-4380-b346-90b189637523"
+		},
+		"AzureBlobConnection_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "8123a2b8-9094-47a6-b1f3-ee99b960a92a"
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
@@ -54,8 +74,23 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureBlobConnection_servicePrincipalKey": {
+						"value": "[parameters('AzureBlobConnection_servicePrincipalKey')]"
+					},
 					"AzureDataLakeStorage1_servicePrincipalKey": {
 						"value": "[parameters('AzureDataLakeStorage1_servicePrincipalKey')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"AzureBlobConnection_properties_typeProperties_serviceEndpoint": {
+						"value": "[parameters('AzureBlobConnection_properties_typeProperties_serviceEndpoint')]"
+					},
+					"AzureBlobConnection_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureBlobConnection_properties_typeProperties_tenant')]"
+					},
+					"AzureBlobConnection_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('AzureBlobConnection_properties_typeProperties_servicePrincipalId')]"
 					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"

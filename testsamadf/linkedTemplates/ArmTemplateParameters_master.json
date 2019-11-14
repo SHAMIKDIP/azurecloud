@@ -5,8 +5,23 @@
 		"factoryName": {
 			"value": "testsamadf"
 		},
+		"AzureBlobConnection_servicePrincipalKey": {
+			"value": ""
+		},
 		"AzureDataLakeStorage1_servicePrincipalKey": {
 			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"AzureBlobConnection_properties_typeProperties_serviceEndpoint": {
+			"value": "https://samtestblobstorage.blob.core.windows.net"
+		},
+		"AzureBlobConnection_properties_typeProperties_tenant": {
+			"value": "723e8d0b-aacd-4380-b346-90b189637523"
+		},
+		"AzureBlobConnection_properties_typeProperties_servicePrincipalId": {
+			"value": "8123a2b8-9094-47a6-b1f3-ee99b960a92a"
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://samtestaccount.dfs.core.windows.net"
