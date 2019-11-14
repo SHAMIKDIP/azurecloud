@@ -35,6 +35,9 @@
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://testsamkey.vault.azure.net/"
 		},
+		"CopyDataTrigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/58956ed3-77c0-4fbc-b73a-a6f989680e97/resourceGroups/testresource/providers/Microsoft.Storage/storageAccounts/samtestaccount"
+		},
 		"containerUri": {
 			"value": ""
 		},
