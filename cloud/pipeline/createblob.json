@@ -1,6 +1,40 @@
 {
 	"name": "createblob",
 	"properties": {
+		"activities": [
+			{
+				"name": "GetData",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://wise.sec.gouv.sn/WISE/MobileMoney",
+					"method": "GET",
+					"headers": {
+						"Content-type": "application/json"
+					},
+					"linkedServices": [
+						{
+							"referenceName": "AzureDataLakeStorage1",
+							"type": "LinkedServiceReference"
+						}
+					],
+					"datasets": [
+						{
+							"referenceName": "jsonData",
+							"type": "DatasetReference"
+						}
+					]
+				}
+			}
+		],
 		"annotations": []
 	}
 }
