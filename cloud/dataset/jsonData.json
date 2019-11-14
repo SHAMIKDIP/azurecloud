@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "jsonData.txt",
+				"fileName": "data.txt",
 				"fileSystem": "testcontainer"
 			},
 			"columnDelimiter": ",",
