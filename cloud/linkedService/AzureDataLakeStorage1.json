@@ -8,7 +8,7 @@
 			"url": "https://samtestaccount.dfs.core.windows.net",
 			"tenant": "723e8d0b-aacd-4380-b346-90b189637523",
 			"servicePrincipalId": "8123a2b8-9094-47a6-b1f3-ee99b960a92a",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlRFU1RTQU1BREZfODI1MzAwOGUtODM3OC00YWUwLWJmNmItYTg4MTUxN2E5NWYwIg0KfQ=="
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlRFU1RTQU1BREZfYjg4MDQyZjEtMmRlNi00MDZmLWEzY2MtZTY5NjViNDk2MWE0Ig0KfQ=="
 		}
 	}
 }
