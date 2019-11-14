@@ -40,7 +40,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@('lookup).output.value'",
+						"value": "@activity('lookup').output.value",
 						"type": "Expression"
 					},
 					"activities": [
@@ -60,11 +60,28 @@
 								"source": {
 									"type": "AzureSqlSource"
 								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
 								"enableStaging": false
 							},
 							"inputs": [
 								{
 									"referenceName": "AzureSqlTable",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "loadDatatoFile",
 									"type": "DatasetReference"
 								}
 							]
