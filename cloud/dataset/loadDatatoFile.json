@@ -10,7 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "test.txt",
+				"fileName": {
+					"value": "@item().FirstName",
+					"type": "Expression"
+				},
 				"fileSystem": "container"
 			},
 			"columnDelimiter": ",",
