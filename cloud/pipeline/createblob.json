@@ -28,7 +28,7 @@
 					],
 					"datasets": [
 						{
-							"referenceName": "jsonData",
+							"referenceName": "blobData",
 							"type": "DatasetReference"
 						}
 					]
