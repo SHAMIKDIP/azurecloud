@@ -42,7 +42,58 @@
 					"items": {
 						"value": "@activity('GetContainerPath').output.value",
 						"type": "Expression"
-					}
+					},
+					"activities": [
+						{
+							"name": "GetFileData",
+							"type": "GetMetadata",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "FileSet",
+									"type": "DatasetReference"
+								},
+								"fieldList": [
+									"lastModified"
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							}
+						},
+						{
+							"name": "SetPipelineVariable",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "GetFileData",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "LastModified",
+								"value": {
+									"value": "@activity('GetFileData').output.value",
+									"type": "Expression"
+								}
+							}
+						}
+					]
 				}
 			},
 			{
@@ -112,6 +163,11 @@
 				}
 			}
 		],
+		"variables": {
+			"LastModified": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
