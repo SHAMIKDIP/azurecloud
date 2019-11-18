@@ -74,7 +74,7 @@
 							}
 						},
 						{
-							"name": "Set variable1",
+							"name": "SetPipelineVariable",
 							"type": "SetVariable",
 							"dependsOn": [
 								{
