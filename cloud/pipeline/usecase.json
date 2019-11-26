@@ -164,6 +164,99 @@
 								"referenceName": "AzureSqlDatabase1",
 								"type": "LinkedServiceReference"
 							}
+						},
+						{
+							"name": "loadDatatoTable",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "SetPipelineVariable",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"sqlWriterStoredProcedureName": "[dbo].[loadSalesData]",
+									"storedProcedureParameters": {
+										"Country": {
+											"type": "String"
+										},
+										"ItemType": {
+											"type": "String"
+										},
+										"OrderDate": {
+											"type": "DateTime"
+										},
+										"OrderID": {
+											"type": "Int32"
+										},
+										"OrderPriority": {
+											"type": "String"
+										},
+										"Region": {
+											"type": "String"
+										},
+										"SalesChannel": {
+											"type": "String"
+										},
+										"ShipDate": {
+											"type": "DateTime"
+										},
+										"TotalCost": {
+											"type": "Double"
+										},
+										"TotalProfit": {
+											"type": "Double"
+										},
+										"TotalRevenue": {
+											"type": "Double"
+										},
+										"UnitCost": {
+											"type": "Double"
+										},
+										"UnitPrice": {
+											"type": "Double"
+										},
+										"UnitsSold": {
+											"type": "Int32"
+										}
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "FileSet",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "AzureSqlTable",
+									"type": "DatasetReference"
+								}
+							]
 						}
 					]
 				}
