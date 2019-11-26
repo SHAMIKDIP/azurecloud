@@ -92,6 +92,42 @@
 									"type": "Expression"
 								}
 							}
+						},
+						{
+							"name": "LogFileStatus",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "GetFileData",
+									"dependencyConditions": [
+										"Failed"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[pipelinelogging]",
+								"storedProcedureParameters": {
+									"Msg": {
+										"value": {
+											"value": "@concat(item().ContainerName, '/' , item().FileName) not found",
+											"type": "Expression"
+										},
+										"type": "String"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureSqlDatabase1",
+								"type": "LinkedServiceReference"
+							}
 						}
 					]
 				}
