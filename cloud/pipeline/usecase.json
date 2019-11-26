@@ -198,6 +198,8 @@
 								"sink": {
 									"type": "AzureSqlSink",
 									"sqlWriterStoredProcedureName": "[dbo].[loadSalesData]",
+									"sqlWriterTableType": "acvc",
+									"storedProcedureTableTypeParameterName": "ccbc",
 									"storedProcedureParameters": {
 										"Country": {
 											"type": "String"
