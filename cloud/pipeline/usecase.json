@@ -198,53 +198,7 @@
 								},
 								"sink": {
 									"type": "AzureSqlSink",
-									"sqlWriterStoredProcedureName": "[dbo].[loadSalesData]",
-									"sqlWriterTableType": "acvc",
-									"storedProcedureTableTypeParameterName": "ccbc",
-									"storedProcedureParameters": {
-										"Country": {
-											"type": "String"
-										},
-										"ItemType": {
-											"type": "String"
-										},
-										"OrderDate": {
-											"type": "DateTime"
-										},
-										"OrderID": {
-											"type": "Int32"
-										},
-										"OrderPriority": {
-											"type": "String"
-										},
-										"Region": {
-											"type": "String"
-										},
-										"SalesChannel": {
-											"type": "String"
-										},
-										"ShipDate": {
-											"type": "DateTime"
-										},
-										"TotalCost": {
-											"type": "Double"
-										},
-										"TotalProfit": {
-											"type": "Double"
-										},
-										"TotalRevenue": {
-											"type": "Double"
-										},
-										"UnitCost": {
-											"type": "Double"
-										},
-										"UnitPrice": {
-											"type": "Double"
-										},
-										"UnitsSold": {
-											"type": "Int32"
-										}
-									}
+									"tableOption": "autoCreate"
 								},
 								"enableStaging": false,
 								"translator": {
