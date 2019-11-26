@@ -47,14 +47,7 @@
 						{
 							"name": "GetFileData",
 							"type": "GetMetadata",
-							"dependsOn": [
-								{
-									"activity": "Stored Procedure1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
+							"dependsOn": [],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
@@ -98,35 +91,6 @@
 									"value": "@activity('GetFileData').output.value",
 									"type": "Expression"
 								}
-							}
-						},
-						{
-							"name": "Stored Procedure1",
-							"type": "SqlServerStoredProcedure",
-							"dependsOn": [],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"storedProcedureName": "[dbo].[pipelinelogging]",
-								"storedProcedureParameters": {
-									"Msg": {
-										"value": {
-											"value": "@concat(item().ContainerName , item().FileName)",
-											"type": "Expression"
-										},
-										"type": "String"
-									}
-								}
-							},
-							"linkedServiceName": {
-								"referenceName": "AzureSqlDatabase1",
-								"type": "LinkedServiceReference"
 							}
 						}
 					]
