@@ -11,11 +11,11 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@item().FileName",
+					"value": "item().FileName",
 					"type": "Expression"
 				},
 				"fileSystem": {
-					"value": "@item().ContainerName",
+					"value": "item().ContainerName",
 					"type": "Expression"
 				}
 			},
