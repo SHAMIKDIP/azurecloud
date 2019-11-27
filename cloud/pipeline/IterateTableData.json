@@ -21,7 +21,7 @@
 					},
 					"activities": [
 						{
-							"name": "If Condition1",
+							"name": "CheckData",
 							"type": "IfCondition",
 							"dependsOn": [],
 							"userProperties": [],
