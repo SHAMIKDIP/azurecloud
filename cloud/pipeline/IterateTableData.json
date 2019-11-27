@@ -50,6 +50,65 @@
 									"value": "equals(@item().Teacher , 'XYZ')",
 									"type": "Expression"
 								},
+								"ifFalseActivities": [
+									{
+										"name": "loadActualData",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[dbo].[ConvertStdDetails]",
+											"storedProcedureParameters": {
+												"Dob": {
+													"value": {
+														"value": "@item().Dob",
+														"type": "Expression"
+													},
+													"type": "DateTime"
+												},
+												"Email": {
+													"value": {
+														"value": "@item().Email",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"FullName": {
+													"value": {
+														"value": "@item().FullName",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"Subject": {
+													"value": {
+														"value": "@item().Subject",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"Teacher": {
+													"value": {
+														"value": "@item().Teacher",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "AzureSqlDatabase1",
+											"type": "LinkedServiceReference"
+										}
+									}
+								],
 								"ifTrueActivities": [
 									{
 										"name": "loadConvertedData",
