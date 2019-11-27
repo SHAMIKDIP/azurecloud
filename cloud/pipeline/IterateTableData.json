@@ -27,7 +27,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "equals(item().Teacher , 'XYZ')",
+									"value": "@startswith(item().Teacher , 'XY')",
 									"type": "Expression"
 								},
 								"ifFalseActivities": [
