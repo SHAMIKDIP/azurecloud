@@ -200,62 +200,7 @@
 									"type": "AzureSqlSink",
 									"tableOption": "autoCreate"
 								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"mappings": [
-										{
-											"source": {
-												"name": "OrderID",
-												"type": "Int32"
-											},
-											"sink": {
-												"name": "PersonId",
-												"type": "int"
-											}
-										},
-										{
-											"source": {
-												"name": "Region",
-												"type": "String"
-											},
-											"sink": {
-												"name": "FirstName",
-												"type": "nvarchar"
-											}
-										},
-										{
-											"source": {
-												"name": "Country",
-												"type": "String"
-											},
-											"sink": {
-												"name": "MiddelInitial",
-												"type": "nvarchar"
-											}
-										},
-										{
-											"source": {
-												"name": "ItemType",
-												"type": "String"
-											},
-											"sink": {
-												"name": "LastName",
-												"type": "nvarchar"
-											}
-										},
-										{
-											"source": {
-												"name": "SalesChannel",
-												"type": "String"
-											},
-											"sink": {
-												"name": "DateOfBirth",
-												"type": "date"
-											}
-										}
-									]
-								}
+								"enableStaging": false
 							},
 							"inputs": [
 								{
