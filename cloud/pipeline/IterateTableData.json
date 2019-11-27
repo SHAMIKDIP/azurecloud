@@ -27,7 +27,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "equals(@item().Teacher , 'XYZ')",
+									"value": "equals(item().Teacher , 'XYZ')",
 									"type": "Expression"
 								},
 								"ifFalseActivities": [
