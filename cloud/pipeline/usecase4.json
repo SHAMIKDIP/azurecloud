@@ -61,7 +61,9 @@
 									"referenceName": "FileSet",
 									"type": "DatasetReference"
 								},
-								"fieldList": [],
+								"fieldList": [
+									"itemName"
+								],
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
 									"recursive": true
