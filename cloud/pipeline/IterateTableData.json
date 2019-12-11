@@ -1,0 +1,183 @@
+{
+	"name": "IterateTableData",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "GetStudentDetails",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('GetStudentDetails').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "CheckData",
+							"type": "IfCondition",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@startswith(item().Teacher , 'XY')",
+									"type": "Expression"
+								},
+								"ifFalseActivities": [
+									{
+										"name": "loadActualData",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[dbo].[ConvertStdDetails]",
+											"storedProcedureParameters": {
+												"Dob": {
+													"value": {
+														"value": "@item().Dob",
+														"type": "Expression"
+													},
+													"type": "DateTime"
+												},
+												"Email": {
+													"value": {
+														"value": "@item().Email",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"FullName": {
+													"value": {
+														"value": "@item().FullName",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"Subject": {
+													"value": {
+														"value": "@item().Subject",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"Teacher": {
+													"value": {
+														"value": "@item().Teacher",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "AzureSqlDatabase1",
+											"type": "LinkedServiceReference"
+										}
+									}
+								],
+								"ifTrueActivities": [
+									{
+										"name": "loadConvertedData",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[dbo].[ConvertStdDetails]",
+											"storedProcedureParameters": {
+												"Dob": {
+													"value": {
+														"value": "@item().Dob",
+														"type": "Expression"
+													},
+													"type": "DateTime"
+												},
+												"Email": {
+													"value": {
+														"value": "@item().Email",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"FullName": {
+													"value": {
+														"value": "@item().FullName",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"Subject": {
+													"value": {
+														"value": "@item().Subject",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"Teacher": {
+													"value": {
+														"value": "@concat('new ' , item().Teacher)",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "AzureSqlDatabase1",
+											"type": "LinkedServiceReference"
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "GetStudentDetails",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderStoredProcedureName": "[dbo].[StdDetails]"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlTable",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			}
+		],
+		"annotations": []
+	}
+}

@@ -59,6 +59,10 @@
 							"typeProperties": {
 								"source": {
 									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "select * from [dbo].[stage];",
+										"type": "Expression"
+									}
 									"sqlReaderQuery": "select FirstName,MiddelInitial,LastName,DateOfBirth,Email\n from dbo.Person inner join dbo.Student on [dbo].[Person].PersonId \n = [dbo].[Student].PersonId;"
 								},
 								"sink": {
@@ -161,6 +165,68 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "SendSuccessEmail",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "InsertSuccessLog",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-46.eastus.logic.azure.com:443/workflows/d7133165ec7845599eca0bf8c7e24c1c/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=qKKNZHZFUxdjJzu-LuWcAdxJRAGVgz9LdZ2n32qcvJw",
+					"method": "POST",
+					"headers": {
+						"content-type": "application/json"
+					},
+					"body": {
+						"value": "{\n   \"DataFactoryName\": \"@{pipeline().DataFactory}\",\n   \"PipelineName\": \"@{pipeline().Pipeline}\",\n   \"Subject\": \"@{pipeline().parameters.subject}\",\n   \"ErrorMessage\": \"@{pipeline().parameters.successMsg}\",\n   \"EmailTo\": \"@{pipeline().parameters.receipent}\",\n   \"CC\":\"@{pipeline().parameters.emailcc}\"\n}\t",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "SendFailureEmail",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "InsertFailureLog",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-46.eastus.logic.azure.com:443/workflows/d7133165ec7845599eca0bf8c7e24c1c/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=qKKNZHZFUxdjJzu-LuWcAdxJRAGVgz9LdZ2n32qcvJw",
+					"method": "POST",
+					"headers": {
+						"content-type": "application/json"
+					},
+					"body": {
+						"value": "{\n   \"DataFactoryName\": \"@{pipeline().DataFactory}\",\n   \"PipelineName\": \"@{pipeline().Pipeline}\",\n   \"Subject\": \"@{pipeline().parameters.subject}\",\n   \"ErrorMessage\": \"@{pipeline().parameters.failureMsg}\",\n   \"EmailTo\": \"@{pipeline().parameters.receipent}\",\n   \"CC\":\"@{pipeline().parameters.emailcc}\"\n}\t",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -171,6 +237,18 @@
 			"failureMsg": {
 				"type": "string",
 				"defaultValue": "Failed to copy data"
+			},
+			"receipent": {
+				"type": "string",
+				"defaultValue": "shamikbaksi@gmail.com,dipsambakshi@gmail.com"
+			},
+			"emailcc": {
+				"type": "string",
+				"defaultValue": "shamikcloudguru@gmail.com"
+			},
+			"subject": {
+				"type": "string",
+				"defaultValue": "Response from ADF"
 			}
 		},
 		"annotations": []
