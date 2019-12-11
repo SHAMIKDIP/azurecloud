@@ -63,6 +63,7 @@
 										"value": "select * from [dbo].[stage];",
 										"type": "Expression"
 									}
+									"sqlReaderQuery": "select FirstName,MiddelInitial,LastName,DateOfBirth,Email\n from dbo.Person inner join dbo.Student on [dbo].[Person].PersonId \n = [dbo].[Student].PersonId;"
 								},
 								"sink": {
 									"type": "DelimitedTextSink",
