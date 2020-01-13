@@ -6,7 +6,9 @@
 		"type": "AzureBlobFS",
 		"typeProperties": {
 			"url": "https://adlselancodev.dfs.core.windows.net",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkFERi1FTEFOQ08tREVWXzViMmE4Yzg3LWQ0ZTQtNGU4My1hMmM2LTczNzRhYjExODMwMCINCn0="
+			"tenant": "c059781e-90e4-45d8-bc83-9ec7334f509e",
+			"servicePrincipalId": "b15c0444-4a19-4aa2-b74b-8008b734dbbc",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkFERi1FTEFOQ08tREVWXzU1YjQ1YTRjLTY1NTQtNDljMC1hOTI4LWQwMjhiMjkwOTJiZiINCn0="
 		}
 	}
 }
