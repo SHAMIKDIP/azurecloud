@@ -1,0 +1,64 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStoreGen1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureDataLakeStoreLocation",
+				"fileName": "Finance_Data.csv",
+				"folderPath": "input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "StockItemTransactionID",
+				"type": "String"
+			},
+			{
+				"name": "Description of items",
+				"type": "String"
+			},
+			{
+				"name": "CustomerPurchaseOrderNumber",
+				"type": "String"
+			},
+			{
+				"name": "InvoiceDate",
+				"type": "String"
+			},
+			{
+				"name": "TaxRate",
+				"type": "String"
+			},
+			{
+				"name": "DeliveryInstructions",
+				"type": "String"
+			},
+			{
+				"name": "ConfirmedDeliveryTime",
+				"type": "String"
+			},
+			{
+				"name": "ConfirmedReceivedBy",
+				"type": "String"
+			},
+			{
+				"name": "PaymentMethodName",
+				"type": "String"
+			},
+			{
+				"name": "LineProfit",
+				"type": "String"
+			}
+		]
+	}
+}

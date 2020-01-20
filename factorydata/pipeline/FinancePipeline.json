@@ -1,0 +1,154 @@
+{
+	"name": "FinancePipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureDataLakeStoreReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "StockItemTransactionID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TransactionID",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Description of items",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CustomerPurchaseOrderNumber",
+									"type": "String"
+								},
+								"sink": {
+									"name": "OrderNumber",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "InvoiceDate",
+									"type": "String"
+								},
+								"sink": {
+									"name": "InvoiceDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "TaxRate",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TaxRate",
+									"type": "Single"
+								}
+							},
+							{
+								"source": {
+									"name": "DeliveryInstructions",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Instructions",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ConfirmedDeliveryTime",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DeliveryTime",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ConfirmedReceivedBy",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReceivedBy",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PaymentMethodName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PaymentMethod",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LineProfit",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LineProfit",
+									"type": "Single"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
