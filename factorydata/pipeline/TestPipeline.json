@@ -21,7 +21,7 @@
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
-						"referenceName": "AzureSqlDataset",
+						"referenceName": "AzureSqlTable1",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
@@ -48,7 +48,14 @@
 						{
 							"name": "CopyDatatoDb",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "GetModifiedDate",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
@@ -70,7 +77,8 @@
 								},
 								"sink": {
 									"type": "AzureSqlSink",
-									"tableOption": "autoCreate"
+									"tableOption": "autoCreate",
+									"disableMetricsCollection": false
 								},
 								"enableStaging": false,
 								"enableSkipIncompatibleRow": true
@@ -87,11 +95,167 @@
 									"type": "DatasetReference"
 								}
 							]
+						},
+						{
+							"name": "SetSuccessStatus",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "CopyDatatoDb",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[UpdateRuntimeStatus]",
+								"storedProcedureParameters": {
+									"FileId": {
+										"value": {
+											"value": "@item().Id",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"FileModifiedDate": {
+										"value": {
+											"value": "@variables('ModifiedDate')",
+											"type": "Expression"
+										},
+										"type": "DateTime"
+									},
+									"PipelineRuntime": {
+										"value": null,
+										"type": "DateTime"
+									},
+									"Status": {
+										"value": "1",
+										"type": "Int32"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureSqlDatabase1",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "SetFailureStatus",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "CopyDatatoDb",
+									"dependencyConditions": [
+										"Failed"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[UpdateRuntimeStatus]",
+								"storedProcedureParameters": {
+									"FileId": {
+										"value": {
+											"value": "@item().Id",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"FileModifiedDate": {
+										"value": {
+											"value": "@variables('ModifiedDate')",
+											"type": "Expression"
+										},
+										"type": "DateTime"
+									},
+									"PipelineRuntime": {
+										"value": null,
+										"type": "DateTime"
+									},
+									"Status": {
+										"value": "0",
+										"type": "Int32"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureSqlDatabase1",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "GetModifiedDate",
+							"type": "GetMetadata",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "InputDataset",
+									"type": "DatasetReference"
+								},
+								"fieldList": [
+									"lastModified"
+								],
+								"storeSettings": {
+									"type": "AzureDataLakeStoreReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							}
+						},
+						{
+							"name": "SeModifiedDate",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "GetModifiedDate",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "ModifiedDate",
+								"value": {
+									"value": "@activity('GetModifiedDate').output.value.lastModified",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
 			}
 		],
+		"variables": {
+			"ModifiedDate": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
