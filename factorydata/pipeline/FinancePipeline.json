@@ -114,7 +114,14 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Users/shamikbaksi93@outlook.com/notebookdatalakemount"
+							},
+							"linkedServiceName": {
+								"referenceName": "DatabricksConn",
+								"type": "LinkedServiceReference"
+							}
 						},
 						{
 							"name": "LogCopyFailureStas",
@@ -156,8 +163,23 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
+								"sink": {
+									"type": "AzureSqlSink"
+								},
 								"enableStaging": false
-							}
+							},
+							"outputs": [
+								{
+									"referenceName": "AzureSqlTable1",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableName": {
+											"value": "@item().TableName",
+											"type": "Expression"
+										}
+									}
+								}
+							]
 						},
 						{
 							"name": "UpdateSuccesStats",
