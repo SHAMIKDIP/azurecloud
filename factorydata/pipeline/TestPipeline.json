@@ -242,7 +242,7 @@
 							"typeProperties": {
 								"variableName": "ModifiedDate",
 								"value": {
-									"value": "@activity('GetModifiedDate').output.value.lastModified",
+									"value": "@activity('GetModifiedDate').output.lastModified",
 									"type": "Expression"
 								}
 							}
