@@ -1,0 +1,81 @@
+{
+	"name": "DatabricksPipelinePOC",
+	"properties": {
+		"activities": [
+			{
+				"name": "GetMergedFiles",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:07:00",
+					"retry": 2,
+					"retryIntervalInSeconds": 10,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderStoredProcedureName": "[dbo].[GetMeregedFiles]",
+						"storedProcedureParameters": {
+							"FileType": {
+								"type": "String",
+								"value": {
+									"value": "@pipeline().parameters.FileType",
+									"type": "Expression"
+								}
+							}
+						},
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "TransformMergeFiles",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "GetMergedFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/shamikbaksi93@outlook.com/MergeOp",
+					"baseParameters": {
+						"FileDetails": {
+							"value": "@activity('GetMergedFiles').output.value",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "DatabricksConn",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"FileType": {
+				"type": "string",
+				"defaultValue": "merge"
+			}
+		},
+		"annotations": []
+	}
+}
