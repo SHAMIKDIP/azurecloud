@@ -133,7 +133,10 @@
 										"type": "DateTime"
 									},
 									"PipelineRuntime": {
-										"value": null,
+										"value": {
+											"value": "@pipeline().TriggerTime",
+											"type": "Expression"
+										},
 										"type": "DateTime"
 									},
 									"Status": {
@@ -184,7 +187,10 @@
 										"type": "DateTime"
 									},
 									"PipelineRuntime": {
-										"value": null,
+										"value": {
+											"value": "@pipeline().TriggerTime",
+											"type": "Expression"
+										},
 										"type": "DateTime"
 									},
 									"Status": {
