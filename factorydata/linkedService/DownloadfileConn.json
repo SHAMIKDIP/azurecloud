@@ -1,0 +1,12 @@
+{
+	"name": "DownloadfileConn",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://wise.sec.gouv.sn/WISE/GetWiseApk",
+			"enableServerCertificateValidation": false,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
