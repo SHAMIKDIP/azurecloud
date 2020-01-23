@@ -45,12 +45,6 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
-					},
-					{
-						"activity": "Set variable2",
-						"dependencyConditions": [
-							"Succeeded"
-						]
 					}
 				],
 				"policy": {
@@ -66,10 +60,6 @@
 					"baseParameters": {
 						"FileDetails": {
 							"value": "@string(variables('FileNames'))",
-							"type": "Expression"
-						},
-						"FileDir": {
-							"value": "@string(variables('FileDir'))",
 							"type": "Expression"
 						}
 					}
@@ -94,27 +84,7 @@
 				"typeProperties": {
 					"variableName": "FileNames",
 					"value": {
-						"value": "@activity('GetMergedFiles').output.value.FileName",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Set variable2",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "GetMergedFiles",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "FileNames",
-					"value": {
-						"value": "@activity('GetMergedFiles').output.value.FileDir",
+						"value": "@activity('GetMergedFiles').output.value",
 						"type": "Expression"
 					}
 				}
