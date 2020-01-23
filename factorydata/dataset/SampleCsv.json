@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureDataLakeStoreLocation",
-				"fileName": "Customer.csv",
+				"fileName": "moviesDB.csv",
 				"folderPath": "input"
 			},
 			"columnDelimiter": ",",
