@@ -3,30 +3,10 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [
-				{
-					"dataset": {
-						"referenceName": "SampleCsv",
-						"type": "DatasetReference"
-					},
-					"name": "FinalCsv"
-				}
-			],
-			"sinks": [
-				{
-					"dataset": {
-						"referenceName": "DataflowOpset",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				}
-			],
-			"transformations": [
-				{
-					"name": "DerivedColumn1"
-				}
-			],
-			"script": "\n\nsource(output(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string,\n\t\tColumn_6 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> FinalCsv\nFinalCsv derive(MiddleName = abs(0)) ~> DerivedColumn1\nDerivedColumn1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tmapColumn(\n\t\tCid = Column_1,\n\t\tFName = Column_2,\n\t\tLname = Column_3,\n\t\tColumn_4,\n\t\tColumn_5,\n\t\tColumn_6,\n\t\tMiddleName\n\t)) ~> sink1"
+			"sources": [],
+			"sinks": [],
+			"transformations": [],
+			"script": "\n"
 		}
 	}
 }
