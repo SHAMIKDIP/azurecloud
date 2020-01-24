@@ -3,10 +3,18 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [],
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_dflw_movies",
+						"type": "DatasetReference"
+					},
+					"name": "source"
+				}
+			],
 			"sinks": [],
 			"transformations": [],
-			"script": "\nparameters{\n\tFileName as string,\n\tFileLoc as string,\n\tFileDest as string\n}"
+			"script": "\nparameters{\n\tFileName as string,\n\tFileLoc as string,\n\tFileDest as string\n}\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true) ~> source"
 		}
 	}
 }
