@@ -14,7 +14,7 @@
 			],
 			"sinks": [],
 			"transformations": [],
-			"script": "\nparameters{\n\tFileName as string ($FileName),\n\tFileLoc as string ($FileLoc),\n\tFileDest as string ($FileDest)\n}\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true) ~> source"
+			"script": "\nparameters{\n\tFileName as string,\n\tFileLoc as string,\n\tFileDest as string\n}\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true) ~> source"
 		}
 	}
 }
