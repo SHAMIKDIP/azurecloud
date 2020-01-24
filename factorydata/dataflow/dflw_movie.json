@@ -1,12 +1,12 @@
 {
-	"name": "dataflow1",
+	"name": "dflw_movie",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [],
 			"sinks": [],
 			"transformations": [],
-			"script": "\n"
+			"script": "\nparameters{\n\tFileName as string,\n\tFileLoc as string,\n\tFileDest as string\n}"
 		}
 	}
 }
