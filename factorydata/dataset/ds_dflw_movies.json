@@ -5,6 +5,14 @@
 			"referenceName": "AzureDataLakeStoreGen1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			},
+			"FileLoc": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
