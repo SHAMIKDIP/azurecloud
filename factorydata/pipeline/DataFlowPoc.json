@@ -25,18 +25,16 @@
 					"dataflow": {
 						"referenceName": "dflw_movie",
 						"type": "DataFlowReference",
-						"parameters": {
-							"FileName": {
-								"value": "'@{activity('lp_movie').output.Firstrow.FileName}'",
-								"type": "Expression"
-							},
-							"FileLoc": {
-								"value": "'@{activity('lp_movie').output.Firstrow.FileDir}'",
-								"type": "Expression"
-							},
-							"FileDest": {
-								"value": "'@{/Processed}'",
-								"type": "Expression"
+						"datasetParameters": {
+							"source": {
+								"FilePath": {
+									"value": "@activity('lp_movie').output.Firstrow.FileDir",
+									"type": "Expression"
+								},
+								"FileName": {
+									"value": "@activity('lp_movie').output.Firstrow.FileName",
+									"type": "Expression"
+								}
 							}
 						}
 					},
