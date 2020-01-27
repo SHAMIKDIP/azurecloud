@@ -14,11 +14,19 @@
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "ds_dflw_movies_op",
+						"type": "DatasetReference"
+					},
 					"name": "sink1"
 				}
 			],
-			"transformations": [],
-			"script": "\n\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true) ~> source\nsource sink() ~> sink1"
+			"transformations": [
+				{
+					"name": "GetFilteredData"
+				}
+			],
+			"script": "\n\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true) ~> source\nsource filter(ERROR_FUNCTION('')) ~> GetFilteredData\nGetFilteredData sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['moviesDb.csv'],\n\tpartitionBy('hash', 1)) ~> sink1"
 		}
 	}
 }

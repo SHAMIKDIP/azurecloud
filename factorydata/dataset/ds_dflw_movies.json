@@ -7,10 +7,12 @@
 		},
 		"parameters": {
 			"FilePath": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "/input/RND/20200127"
 			},
 			"FileName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "moviesDB.csv"
 			}
 		},
 		"annotations": [],
