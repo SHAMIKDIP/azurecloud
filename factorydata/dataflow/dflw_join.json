@@ -1,0 +1,68 @@
+{
+	"name": "dflw_join",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_dflw_orders",
+						"type": "DatasetReference"
+					},
+					"name": "Orders"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_dflw_orderitem",
+						"type": "DatasetReference"
+					},
+					"name": "OrderItems"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_dflw_products",
+						"type": "DatasetReference"
+					},
+					"name": "Products"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_dflw_customer",
+						"type": "DatasetReference"
+					},
+					"name": "Customers"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_dflw_joinedoutput",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "JoinorderorderItem"
+				},
+				{
+					"name": "Joinorderitemwithproducts"
+				},
+				{
+					"name": "JoinCustomerDetails"
+				},
+				{
+					"name": "DerivedColumn1"
+				},
+				{
+					"name": "Select1"
+				},
+				{
+					"name": "Sort1"
+				}
+			],
+			"script": "\n\nsource(output(\n\t\tId as string,\n\t\tOrderDate as string,\n\t\tCustomerId as string,\n\t\tTotalAmount as string,\n\t\tOrderNumber as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 4000,\n\tinferDriftedColumnTypes: true,\n\tpartitionBy('hash', 1)) ~> Orders\nsource(output(\n\t\tId as string,\n\t\tOrderId as string,\n\t\tProductId as string,\n\t\tUnitPrice as string,\n\t\tQuantity as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> OrderItems\nsource(output(\n\t\tId as string,\n\t\tProductName as string,\n\t\tSupplierId as string,\n\t\tUnitPrice as string,\n\t\tPackage as string,\n\t\tIsDiscontinued as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Products\nsource(output(\n\t\tId as string,\n\t\tFirstName as string,\n\t\tLastName as string,\n\t\tCity as string,\n\t\tCountry as string,\n\t\tPhone as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Customers\nOrderItems, Orders join(OrderId == Orders@Id,\n\tjoinType:'inner',\n\tbroadcast: 'none')~> JoinorderorderItem\nJoinorderorderItem, Products join(ProductId == Products@Id,\n\tjoinType:'inner',\n\tbroadcast: 'none')~> Joinorderitemwithproducts\nJoinorderitemwithproducts, Customers join(CustomerId == Customers@Id,\n\tjoinType:'inner',\n\tbroadcast: 'none')~> JoinCustomerDetails\nJoinCustomerDetails derive(FirstName = concat(FirstName, ' ', LastName)) ~> DerivedColumn1\nDerivedColumn1 select(mapColumn(\n\t\tUnitPricePaid = OrderItems@UnitPrice,\n\t\tQuantity,\n\t\tOrderDate,\n\t\tTotalAmountPaid = TotalAmount,\n\t\tProductName,\n\t\tActualUnitPrice = Products@UnitPrice,\n\t\tFirstName,\n\t\tCity,\n\t\tCountry\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sort(desc(TotalAmountPaid, true)) ~> Sort1\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CustomerOrders.csv'],\n\tmapColumn(\n\t\tUnitPricePaid,\n\t\tQuantity,\n\t\tOrderDate,\n\t\tTotalAmountPaid,\n\t\tProductName,\n\t\tFirstName,\n\t\tCity,\n\t\tCountry\n\t),\n\tpartitionBy('hash', 1)) ~> sink1"
+		}
+	}
+}
