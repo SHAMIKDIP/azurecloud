@@ -1,5 +1,5 @@
 {
-	"name": "dflw_movie",
+	"name": "dflw_join",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {

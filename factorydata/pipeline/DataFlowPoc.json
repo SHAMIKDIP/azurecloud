@@ -23,7 +23,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dflw_movie",
+						"referenceName": "dflw_join",
 						"type": "DataFlowReference"
 					},
 					"compute": {
