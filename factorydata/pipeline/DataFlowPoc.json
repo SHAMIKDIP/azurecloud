@@ -5,14 +5,7 @@
 			{
 				"name": "dflw_movie",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "lp_movie",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -29,33 +22,6 @@
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
-					}
-				}
-			},
-			{
-				"name": "lp_movie",
-				"type": "Lookup",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": {
-							"value": "SELECT a.Id, a.FileName , replace(concat(FileDir ,'/' , convert(date , b.FileModifiedDate)), '-','') as FileDir FROM [dbo].[FileLookUp] as a inner join [dbo].[PipelineRuntimeStatus] as b on a.Id = b.FileId and b.Stat = 0 and a.FileName = '@{pipeline().parameters.FileName}'\nunion all \nSELECT Id, FileName , replace(concat(FileDir ,'/' , convert(date , getutcdate())), '-','') as FileDir FROM [dbo].[FileLookUp] where FileName = '@{pipeline().parameters.FileName}' \nEXCEPT \nSELECT b.FileId,a.FileName,replace(concat(FileDir ,'/' , convert(date , getutcdate())), '-','') as FileDir FROM [dbo].[FileLookUp] as a inner join [dbo].[PipelineRuntimeStatus] as b on a.Id = b.FileId and b.Stat = 1 and convert(date , b.FileModifiedDate) = convert(date , getutcdate()) and a.FileName = '@{pipeline().parameters.FileName}';",
-							"type": "Expression"
-						},
-						"queryTimeout": "02:00:00"
-					},
-					"dataset": {
-						"referenceName": "AzureSqlTable1",
-						"type": "DatasetReference"
 					}
 				}
 			}
