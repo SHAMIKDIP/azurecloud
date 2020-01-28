@@ -24,19 +24,7 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "dflw_movie",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"source": {
-								"FilePath": {
-									"value": "@activity('lp_movie').output.Firstrow.FileDir",
-									"type": "Expression"
-								},
-								"FileName": {
-									"value": "@activity('lp_movie').output.Firstrow.FileName",
-									"type": "Expression"
-								}
-							}
-						}
+						"type": "DataFlowReference"
 					},
 					"compute": {
 						"coreCount": 8,
