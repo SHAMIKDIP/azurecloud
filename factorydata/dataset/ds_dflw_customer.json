@@ -2,16 +2,17 @@
 	"name": "ds_dflw_customer",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStoreGen1",
+			"referenceName": "AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureDataLakeStoreLocation",
+				"type": "AzureBlobFSLocation",
 				"fileName": "Customer.csv",
-				"folderPath": "input"
+				"folderPath": "input",
+				"fileSystem": "raw"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

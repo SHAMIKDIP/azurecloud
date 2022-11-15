@@ -2,15 +2,15 @@
 	"name": "ds_dflw_movies_op",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStoreGen1",
+			"referenceName": "AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureDataLakeStoreLocation",
-				"folderPath": "processed"
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "processed"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

@@ -2,32 +2,22 @@
 	"name": "ds_dflw_movies",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStoreGen1",
+			"referenceName": "AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
 			"FilePath": {
-				"type": "string",
-				"defaultValue": "/input/RND/20200127"
+				"type": "string"
 			},
 			"FileName": {
-				"type": "string",
-				"defaultValue": "moviesDB.csv"
+				"type": "string"
 			}
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureDataLakeStoreLocation",
-				"fileName": {
-					"value": "@dataset().FileName",
-					"type": "Expression"
-				},
-				"folderPath": {
-					"value": "@dataset().FilePath",
-					"type": "Expression"
-				}
+				"type": "AzureBlobFSLocation"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
