@@ -1,10 +1,6 @@
 {
 	"name": "Binary1",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "DownloadfileConn",
-			"type": "LinkedServiceReference"
-		},
 		"folder": {
 			"name": "POC"
 		},
