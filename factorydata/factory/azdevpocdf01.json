@@ -1,0 +1,9 @@
+{
+	"name": "azdevpocdf01",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2567241e-ddbe-4f17-9eea-a61242b08034",
+		"tenantId": "4a792127-3d38-42f8-92d7-73528bf72edf"
+	}
+}
